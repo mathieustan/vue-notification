@@ -1,18 +1,52 @@
 {
-  "name": "vue-notification",
+  "name": "@mathieustan/vue-notification",
+  "description": "Clean Notifications made with VueJs",
   "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint",
-    "test:unit": "vue-cli-service test:unit"
+  "author": "Mathieu Stanowski <mathieu.stan@gmail.com>",
+  "keywords": [
+    "vue",
+    "vuejs",
+    "javascript",
+    "vue-component",
+    "notifications",
+    "notification",
+    "snackbar",
+    "notify"
+  ],
+  "license": "MIT",
+  "files": [
+    "dist/*.js",
+    "src/*"
+  ],
+  "main": "dist/vue-notification.umd.js",
+  "module": "dist/vue-notification.esm.js",
+  "unpkg": "dist/vue-notification.min.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mathieustan/vue-notification.git"
   },
-  "dependencies": {
+  "bugs": {
+    "url": "https://github.com/mathieustan/vue-notification/issues"
+  },
+  "homepage": "https://vue-notification.netlify.com/",
+  "scripts": {
+    "build": "npm run build:browser && npm run build:es && npm run build:umd",
+    "build:doc": "cd doc-src && npm run build",
+    "build:browser": "rollup --config build/rollup.config.browser.js",
+    "build:es": "rollup --config build/rollup.config.es.js",
+    "build:umd": "rollup --config build/rollup.config.umd.js",
+    "lint": "vue-cli-service lint --ext .js,.vue src tests/unit/* build/*",
+    "lint:fix": "npm run lint --fix",
+    "test:client": "vue-cli-service test:unit",
+    "prepublishOnly": "npm run lint:fix && npm run test:client && npm run build"
+  },
+  "peerDependencies": {
     "core-js": "^2.6.5",
     "vue": "^2.6.10"
   },
   "devDependencies": {
+    "@babel/core": "^7.4.5",
+    "@babel/plugin-transform-runtime": "^7.4.4",
     "@vue/cli-plugin-babel": "^3.9.0",
     "@vue/cli-plugin-eslint": "^3.9.0",
     "@vue/cli-plugin-unit-jest": "^3.9.0",
@@ -22,10 +56,25 @@
     "babel-core": "7.0.0-bridge.0",
     "babel-eslint": "^10.0.1",
     "babel-jest": "^23.6.0",
+    "babel-plugin-dynamic-import-node-babel-7": "^2.0.7",
     "eslint": "^5.16.0",
     "eslint-plugin-vue": "^5.0.0",
+    "node-sass": "^4.12.0",
+    "rollup": "^1.14.6",
+    "rollup-plugin-babel": "4.2.0",
+    "rollup-plugin-commonjs": "^9.1.0",
+    "rollup-plugin-css-porter": "^0.1.2",
+    "rollup-plugin-eslint": "^4.0.0",
+    "rollup-plugin-node-resolve": "4.0.0",
+    "rollup-plugin-replace": "^2.0.0",
+    "rollup-plugin-terser": "^5.0.0",
+    "rollup-plugin-vue": "4.2.0",
     "sass": "^1.18.0",
     "sass-loader": "^7.1.0",
+    "vue": "^2.6.10",
     "vue-template-compiler": "^2.6.10"
+  },
+  "directories": {
+    "test": "tests"
   }
 }

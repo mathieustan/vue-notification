@@ -1,9 +1,7 @@
 module.exports = {
-  root: true,
-  env: {
-    node: true,
-  },
-  extends: ['plugin:vue/essential', '@vue/standard'],
+  extends: [
+    '@vue/standard',
+  ],
   rules: {
     'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
@@ -51,7 +49,4 @@ module.exports = {
     'meteor/audit-argument-checks': 'off',
     'no-multiple-empty-lines': ['error', { max: 1 }],
   },
-  parserOptions: {
-    parser: 'babel-eslint',
-  },
-};
+}
