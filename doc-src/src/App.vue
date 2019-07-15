@@ -90,7 +90,7 @@
     ...
     methods<span class="token ponctuation">:</span> {
       showNotification <span class="token ponctuation">()</span> {
-        <span class="token keyword">this</span><span class="token ponctuation">.</span>$gnotify({
+        <span class="token keyword">this</span><span class="token ponctuation">.</span>$notify({
           <span class="token attr-name">message</span>: "{{message}}"
           <span class="token attr-name">top</span>: {{vertical === 'top'}}
           <span class="token attr-name">bottom</span>: {{vertical === 'bottom'}}
@@ -141,13 +141,13 @@
     ...
     methods<span class="token ponctuation">:</span> {
       showNotification <span class="token ponctuation">()</span> {
-        <span class="token keyword">this</span><span class="token ponctuation">.</span>$gnotify.success(<span class="token string">"{{message}}"</span>);
+        <span class="token keyword">this</span><span class="token ponctuation">.</span>$notify.success(<span class="token string">"{{message}}"</span>);
         // OR
-        <span class="token keyword">this</span><span class="token ponctuation">.</span>$gnotify.info(<span class="token string">"{{message}}"</span>);
+        <span class="token keyword">this</span><span class="token ponctuation">.</span>$notify.info(<span class="token string">"{{message}}"</span>);
         // OR
-        <span class="token keyword">this</span><span class="token ponctuation">.</span>$gnotify.warning(<span class="token string">"{{message}}"</span>);
+        <span class="token keyword">this</span><span class="token ponctuation">.</span>$notify.warning(<span class="token string">"{{message}}"</span>);
         // OR
-        <span class="token keyword">this</span><span class="token ponctuation">.</span>$gnotify.error(<span class="token string">"{{message}}"</span>);
+        <span class="token keyword">this</span><span class="token ponctuation">.</span>$notify.error(<span class="token string">"{{message}}"</span>);
         // OR
       },
     }
@@ -192,7 +192,7 @@
     ...
     methods<span class="token ponctuation">:</span> {
       showNotification <span class="token ponctuation">()</span> {
-        <span class="token keyword">this</span><span class="token ponctuation">.</span>$gnotify({
+        <span class="token keyword">this</span><span class="token ponctuation">.</span>$notify({
           <span class="token attr-name">type</span>: "success"
           <span class="token attr-name">message</span>: "{{message}}"
           <span class="token attr-name">hideIcon</span>: true,
@@ -232,7 +232,7 @@
     ...
     methods<span class="token ponctuation">:</span> {
       showNotification <span class="token ponctuation">()</span> {
-        <span class="token keyword">this</span><span class="token ponctuation">.</span>$gnotify({
+        <span class="token keyword">this</span><span class="token ponctuation">.</span>$notify({
           <span class="token attr-name">message</span>: "{{message}}"
           <span class="token attr-name">multiLine</span>: true,
         });
@@ -271,7 +271,7 @@
     ...
     methods<span class="token ponctuation">:</span> {
       showNotification <span class="token ponctuation">()</span> {
-        <span class="token keyword">this</span><span class="token ponctuation">.</span>$gnotify({
+        <span class="token keyword">this</span><span class="token ponctuation">.</span>$notify({
           <span class="token attr-name">message</span>: "{{message}}"
           <span class="token attr-name">offset</span>: {{offset}},
         });
@@ -314,7 +314,7 @@
     ...
     methods<span class="token ponctuation">:</span> {
       showNotification <span class="token ponctuation">()</span> {
-        <span class="token keyword">this</span><span class="token ponctuation">.</span>$gnotify({
+        <span class="token keyword">this</span><span class="token ponctuation">.</span>$notify({
           <span class="token attr-name">message</span>: "{{message}}"
           <span class="token attr-name">actionText</span>: {{actionText}}
           <span class="token attr-name">onActionClick</span>: () => ({}),
@@ -347,7 +347,7 @@
     ...
     methods<span class="token ponctuation">:</span> {
       showNotification <span class="token ponctuation">()</span> {
-        <span class="token keyword">this</span><span class="token ponctuation">.</span>$gnotify({
+        <span class="token keyword">this</span><span class="token ponctuation">.</span>$notify({
           <span class="token attr-name">message</span>: "{{message}}"
           <span class="token attr-name">showClose</span>: true,
         });
@@ -376,7 +376,7 @@ export default {
     closeDelay: 4500,
     vertical: 'top',
     horizontal: 'left',
-    message: 'Je suis une notification',
+    message: 'Hello, I am a notification',
     offset: 100,
     actionText: 'Test',
   }),
