@@ -86,23 +86,23 @@
 
           <template v-slot:code>
             <CodeWrapper type="javascript">
-  <span class="token operator">&lt;</span>script<span class="token operator">></span>
-    ...
-    methods<span class="token ponctuation">:</span> {
-      showNotification <span class="token ponctuation">()</span> {
-        <span class="token keyword">this</span><span class="token ponctuation">.</span>$notify({
-          <span class="token attr-name">message</span>: "{{message}}"
-          <span class="token attr-name">top</span>: {{vertical === 'top'}}
-          <span class="token attr-name">bottom</span>: {{vertical === 'bottom'}}
-          <span class="token attr-name">left</span>: {{horizontal === 'left'}}
-          <span class="token attr-name">right</span>: {{horizontal === 'right'}}
-          <span class="token attr-name">closeDelay</span>: {{closeDelay}}
-        });
-      },
-    }
-    ...
-  <span class="token operator">&lt;/</span>script<span class="token operator">></span>
-  </CodeWrapper>
+<span class="token operator">&lt;</span>script<span class="token operator">></span>
+  ...
+  methods<span class="token ponctuation">:</span> {
+    showNotification <span class="token ponctuation">()</span> {
+      <span class="token keyword">this</span><span class="token ponctuation">.</span>$notify({
+        <span class="token attr-name">message</span>: "{{message}}"
+        <span class="token attr-name">top</span>: {{vertical === 'top'}}
+        <span class="token attr-name">bottom</span>: {{vertical === 'bottom'}}
+        <span class="token attr-name">left</span>: {{horizontal === 'left'}}
+        <span class="token attr-name">right</span>: {{horizontal === 'right'}}
+        <span class="token attr-name">closeDelay</span>: {{closeDelay}}
+      });
+    },
+  }
+  ...
+<span class="token operator">&lt;/</span>script<span class="token operator">></span>
+</CodeWrapper>
           </template>
       </Wrapper>
 
@@ -137,22 +137,22 @@
 
           <template v-slot:code>
             <CodeWrapper type="javascript">
-  <span class="token operator">&lt;</span>script<span class="token operator">></span>
-    ...
-    methods<span class="token ponctuation">:</span> {
-      showNotification <span class="token ponctuation">()</span> {
-        <span class="token keyword">this</span><span class="token ponctuation">.</span>$notify.success(<span class="token string">"{{message}}"</span>);
-        // OR
-        <span class="token keyword">this</span><span class="token ponctuation">.</span>$notify.info(<span class="token string">"{{message}}"</span>);
-        // OR
-        <span class="token keyword">this</span><span class="token ponctuation">.</span>$notify.warning(<span class="token string">"{{message}}"</span>);
-        // OR
-        <span class="token keyword">this</span><span class="token ponctuation">.</span>$notify.error(<span class="token string">"{{message}}"</span>);
-        // OR
-      },
-    }
-    ...
-  <span class="token operator">&lt;/</span>script<span class="token operator">></span>
+<span class="token operator">&lt;</span>script<span class="token operator">></span>
+  ...
+  methods<span class="token ponctuation">:</span> {
+    showNotification <span class="token ponctuation">()</span> {
+      <span class="token keyword">this</span><span class="token ponctuation">.</span>$notify.success(<span class="token string">"{{message}}"</span>);
+      // OR
+      <span class="token keyword">this</span><span class="token ponctuation">.</span>$notify.info(<span class="token string">"{{message}}"</span>);
+      // OR
+      <span class="token keyword">this</span><span class="token ponctuation">.</span>$notify.warning(<span class="token string">"{{message}}"</span>);
+      // OR
+      <span class="token keyword">this</span><span class="token ponctuation">.</span>$notify.error(<span class="token string">"{{message}}"</span>);
+      // OR
+    },
+  }
+  ...
+<span class="token operator">&lt;/</span>script<span class="token operator">></span>
   </CodeWrapper>
           </template>
       </Wrapper>
@@ -188,20 +188,20 @@
 
           <template v-slot:code>
             <CodeWrapper type="javascript">
-  <span class="token operator">&lt;</span>script<span class="token operator">></span>
-    ...
-    methods<span class="token ponctuation">:</span> {
-      showNotification <span class="token ponctuation">()</span> {
-        <span class="token keyword">this</span><span class="token ponctuation">.</span>$notify({
-          <span class="token attr-name">type</span>: "success"
-          <span class="token attr-name">message</span>: "{{message}}"
-          <span class="token attr-name">hideIcon</span>: true,
-        });
-      },
-    }
-    ...
-  <span class="token operator">&lt;/</span>script<span class="token operator">></span>
-  </CodeWrapper>
+<span class="token operator">&lt;</span>script<span class="token operator">></span>
+  ...
+  methods<span class="token ponctuation">:</span> {
+    showNotification <span class="token ponctuation">()</span> {
+      <span class="token keyword">this</span><span class="token ponctuation">.</span>$notify({
+        <span class="token attr-name">type</span>: "success"
+        <span class="token attr-name">message</span>: "{{message}}"
+        <span class="token attr-name">hideIcon</span>: true,
+      });
+    },
+  }
+  ...
+<span class="token operator">&lt;/</span>script<span class="token operator">></span>
+</CodeWrapper>
           </template>
       </Wrapper>
 
@@ -228,19 +228,19 @@
 
           <template v-slot:code>
             <CodeWrapper type="javascript">
-  <span class="token operator">&lt;</span>script<span class="token operator">></span>
-    ...
-    methods<span class="token ponctuation">:</span> {
-      showNotification <span class="token ponctuation">()</span> {
-        <span class="token keyword">this</span><span class="token ponctuation">.</span>$notify({
-          <span class="token attr-name">message</span>: "{{message}}"
-          <span class="token attr-name">multiLine</span>: true,
-        });
-      },
-    }
-    ...
-  <span class="token operator">&lt;/</span>script<span class="token operator">></span>
-  </CodeWrapper>
+<span class="token operator">&lt;</span>script<span class="token operator">></span>
+  ...
+  methods<span class="token ponctuation">:</span> {
+    showNotification <span class="token ponctuation">()</span> {
+      <span class="token keyword">this</span><span class="token ponctuation">.</span>$notify({
+        <span class="token attr-name">message</span>: "{{message}}"
+        <span class="token attr-name">multiLine</span>: true,
+      });
+    },
+  }
+  ...
+<span class="token operator">&lt;/</span>script<span class="token operator">></span>
+</CodeWrapper>
           </template>
       </Wrapper>
 
@@ -267,19 +267,19 @@
 
           <template v-slot:code>
             <CodeWrapper type="javascript">
-  <span class="token operator">&lt;</span>script<span class="token operator">></span>
-    ...
-    methods<span class="token ponctuation">:</span> {
-      showNotification <span class="token ponctuation">()</span> {
-        <span class="token keyword">this</span><span class="token ponctuation">.</span>$notify({
-          <span class="token attr-name">message</span>: "{{message}}"
-          <span class="token attr-name">offset</span>: {{offset}},
-        });
-      },
-    }
-    ...
-  <span class="token operator">&lt;/</span>script<span class="token operator">></span>
-  </CodeWrapper>
+<span class="token operator">&lt;</span>script<span class="token operator">></span>
+  ...
+  methods<span class="token ponctuation">:</span> {
+    showNotification <span class="token ponctuation">()</span> {
+      <span class="token keyword">this</span><span class="token ponctuation">.</span>$notify({
+        <span class="token attr-name">message</span>: "{{message}}"
+        <span class="token attr-name">offset</span>: {{offset}},
+      });
+    },
+  }
+  ...
+<span class="token operator">&lt;/</span>script<span class="token operator">></span>
+</CodeWrapper>
           </template>
       </Wrapper>
 
@@ -310,20 +310,20 @@
 
           <template v-slot:code>
             <CodeWrapper type="javascript">
-  <span class="token operator">&lt;</span>script<span class="token operator">></span>
-    ...
-    methods<span class="token ponctuation">:</span> {
-      showNotification <span class="token ponctuation">()</span> {
-        <span class="token keyword">this</span><span class="token ponctuation">.</span>$notify({
-          <span class="token attr-name">message</span>: "{{message}}"
-          <span class="token attr-name">actionText</span>: {{actionText}}
-          <span class="token attr-name">onActionClick</span>: () => ({}),
-        });
-      },
-    }
-    ...
-  <span class="token operator">&lt;/</span>script<span class="token operator">></span>
-  </CodeWrapper>
+<span class="token operator">&lt;</span>script<span class="token operator">></span>
+  ...
+  methods<span class="token ponctuation">:</span> {
+    showNotification <span class="token ponctuation">()</span> {
+      <span class="token keyword">this</span><span class="token ponctuation">.</span>$notify({
+        <span class="token attr-name">message</span>: "{{message}}"
+        <span class="token attr-name">actionText</span>: {{actionText}}
+        <span class="token attr-name">onActionClick</span>: () => ({}),
+      });
+    },
+  }
+  ...
+<span class="token operator">&lt;/</span>script<span class="token operator">></span>
+</CodeWrapper>
           </template>
       </Wrapper>
 
@@ -343,19 +343,19 @@
 
           <template v-slot:code>
             <CodeWrapper type="javascript">
-  <span class="token operator">&lt;</span>script<span class="token operator">></span>
-    ...
-    methods<span class="token ponctuation">:</span> {
-      showNotification <span class="token ponctuation">()</span> {
-        <span class="token keyword">this</span><span class="token ponctuation">.</span>$notify({
-          <span class="token attr-name">message</span>: "{{message}}"
-          <span class="token attr-name">showClose</span>: true,
-        });
-      },
-    }
-    ...
-  <span class="token operator">&lt;/</span>script<span class="token operator">></span>
-  </CodeWrapper>
+<span class="token operator">&lt;</span>script<span class="token operator">></span>
+  ...
+  methods<span class="token ponctuation">:</span> {
+    showNotification <span class="token ponctuation">()</span> {
+      <span class="token keyword">this</span><span class="token ponctuation">.</span>$notify({
+        <span class="token attr-name">message</span>: "{{message}}"
+        <span class="token attr-name">showClose</span>: true,
+      });
+    },
+  }
+  ...
+<span class="token operator">&lt;/</span>script<span class="token operator">></span>
+</CodeWrapper>
           </template>
       </Wrapper>
 
@@ -396,7 +396,7 @@ export default {
         bottom: this.vertical === 'bottom',
         left: this.horizontal === 'left',
         right: this.horizontal === 'right',
-        closeDelay: this.closeDelay,
+        closeDelay: Number(this.closeDelay || 0),
         type,
         multiLine,
         offset: offset && Number(offset),

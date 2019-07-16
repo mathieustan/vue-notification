@@ -1,7 +1,5 @@
 import { Notification } from './components';
 
-export { Notification };
-
 const install = (Vue) => {
   Vue.prototype.$notify = Notification;
 };
@@ -11,6 +9,7 @@ const plugin = {
   // eslint-disable-next-line no-undef
   version: VERSION,
   install,
+  Notification,
 };
 
 export default plugin;

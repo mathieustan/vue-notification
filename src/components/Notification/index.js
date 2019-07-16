@@ -23,7 +23,7 @@ const Notification = (params = { top: true, bottom: false, left: true, right: fa
       verticalOffset: getVerticalOffset(instances, positionName, params),
     },
     mounted () {
-      this.$on('input', (value) => {
+      this.$on('input', value => {
         if (value) return;
         Notification.close(id);
       });

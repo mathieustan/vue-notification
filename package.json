@@ -1,7 +1,7 @@
 {
   "name": "@mathieustan/vue-notification",
   "description": "Clean Notifications made with VueJs",
-  "version": "0.1.0",
+  "version": "0.1.1-rc.1",
   "author": "Mathieu Stanowski <mathieu.stan@gmail.com>",
   "keywords": [
     "vue",
@@ -35,13 +35,13 @@
     "build:browser": "rollup --config build/rollup.config.browser.js",
     "build:es": "rollup --config build/rollup.config.es.js",
     "build:umd": "rollup --config build/rollup.config.umd.js",
+    "build:clean": "rm -rf dist",
     "lint": "vue-cli-service lint --ext .js,.vue src tests/unit/* build/*",
     "lint:fix": "npm run lint --fix",
     "test:client": "vue-cli-service test:unit",
     "prepublishOnly": "npm run lint:fix && npm run test:client && npm run build"
   },
   "peerDependencies": {
-    "core-js": "^2.6.5",
     "vue": "^2.6.10"
   },
   "devDependencies": {
@@ -62,6 +62,7 @@
     "node-sass": "^4.12.0",
     "rollup": "^1.14.6",
     "rollup-plugin-babel": "4.2.0",
+    "rollup-plugin-buble": "^0.19.8",
     "rollup-plugin-commonjs": "^9.1.0",
     "rollup-plugin-css-porter": "^0.1.2",
     "rollup-plugin-eslint": "^4.0.0",
