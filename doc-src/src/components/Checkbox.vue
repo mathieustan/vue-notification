@@ -55,6 +55,9 @@ export default {
   }),
   computed: {
     isActive () {
+      if (!this.value) {
+        return this.inputValue;
+      }
       return this.inputValue === this.value;
     },
   },
@@ -63,6 +66,11 @@ export default {
       this.isFocused = value;
     },
     onClick () {
+      if (!this.value) {
+        this.$emit('change', !this.inputValue);
+        return;
+      }
+
       if (this.isActive) {
         this.$emit('change', undefined);
         return;

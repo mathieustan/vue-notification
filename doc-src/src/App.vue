@@ -100,13 +100,24 @@
           <template v-slot:inputs>
             <form>
               <div class="input-group">
-                <div class="input-form">
+                <div class="input-form flex-grow">
                   <label for="message"> message </label>
                   <input type="text" id="message" name="message" v-model="message">
                 </div>
                 <div class="input-form">
                   <label for="closeDelay"> closeDelay (ms)</label>
                   <input type="number" id="closeDelay" name="closeDelay" v-model="closeDelay">
+                </div>
+                <div class="input-form">
+                  <label for="type-select"> Type </label>
+                  <select id="type-select" v-model="type">
+                    <option
+                      v-for="(type, index) in types"
+                      :key="index"
+                      :value="type.value">
+                      {{ type.name }}
+                    </option>
+                  </select>
                 </div>
               </div>
 
@@ -124,11 +135,16 @@
                   <Checkbox id="horizontal" v-model="horizontal" value="right"> Right </Checkbox>
                 </div>
               </div>
+              <div class="input-group">
+                <div class="input-form">
+                  <Checkbox id="showClose" v-model="showClose"> showClose </Checkbox>
+                </div>
+              </div>
             </form>
           </template>
 
           <template v-slot:example>
-            <button type="button" @click="showNotification"> Show notification </button>
+            <button type="button" @click="showNotification()"> Show notification </button>
           </template>
 
           <template v-slot:code>
@@ -139,10 +155,12 @@
     showNotification <span class="token ponctuation">()</span> {
       <span class="token keyword">this</span><span class="token ponctuation">.</span>$notify({
         <span class="token attr-name">message</span>: "{{message}}"
+        <span class="token attr-name">type</span>: "{{type}}"
         <span class="token attr-name">top</span>: {{vertical === 'top'}}
         <span class="token attr-name">bottom</span>: {{vertical === 'bottom'}}
         <span class="token attr-name">left</span>: {{horizontal === 'left'}}
         <span class="token attr-name">right</span>: {{horizontal === 'right'}}
+        <span class="token attr-name">showClose</span>: {{showClose}}
         <span class="token attr-name">closeDelay</span>: {{closeDelay}}
       });
     },
@@ -444,6 +462,15 @@ export default {
     message: 'Hello, I am a notification',
     offset: 100,
     actionText: 'Test',
+    type: undefined,
+    types: [
+      { name: 'none', value: undefined },
+      { name: 'success', value: 'success' },
+      { name: 'info', value: 'info' },
+      { name: 'warning', value: 'warning' },
+      { name: 'error', value: 'error' },
+    ],
+    showClose: false,
   }),
   methods: {
     showNotification ({
@@ -462,13 +489,13 @@ export default {
         left: this.horizontal === 'left',
         right: this.horizontal === 'right',
         closeDelay: Number(this.closeDelay || 0),
-        type,
+        type: type || this.type,
         multiLine,
         offset: offset && Number(offset),
         actionText,
         onActionClick,
         hideIcon,
-        showClose,
+        showClose: showClose || this.showClose,
       });
     },
   },
@@ -650,11 +677,14 @@ export default {
     .input-form {
       display: flex;
       align-items: center;
-      flex: 1 1 auto;
       width: 100%;
 
       @include mq(tablet) {
         width: auto;
+      }
+
+      &.flex-grow {
+        flex-grow: 1;
       }
     }
 
@@ -668,6 +698,7 @@ export default {
       border: 1px solid color(other, light-gray);
       border-radius: get-border-radius(2);
       padding: 0 4px;
+      font-size: 15px;
 
       &:active,
       &:focus {
@@ -688,6 +719,25 @@ export default {
       padding: 0;
       cursor: inherit;
       margin-right: $gutter;
+    }
+
+    select {
+      background-color: white;
+      padding: 4px;
+      width: 100px;
+      border: none;
+      min-height: 36px;
+      height: 36px;
+      font-size: 15px;
+      -webkit-appearance: button;
+      appearance: button;
+      outline: none;
+      border: 1px solid color(other, light-gray);
+      text-align-last: center;
+
+      option {
+        padding: $gutter*2;
+      }
     }
   }
 </style>
