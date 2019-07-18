@@ -1,6 +1,7 @@
 import { Notification } from './components';
 
-const install = (Vue) => {
+const install = (Vue, opts = {}) => {
+  Notification.options = opts;
   Vue.prototype.$notify = Notification;
 };
 

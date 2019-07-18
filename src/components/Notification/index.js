@@ -10,17 +10,19 @@ let instances = [];
 let seed = 1;
 
 const Notification = (params = { top: true, bottom: false, left: true, right: false }) => {
+  const mergedParams = mergeOptionsWithParams(Notification.options, params);
+
   const id = 'notification_' + seed++;
-  const positions = getPositionsFromOptions(params);
+  const positions = getPositionsFromOptions(mergedParams);
   const positionName = setPositionName(positions);
-  const propsData = (typeof params === 'string') ? { message: params } : params;
+  const propsData = (typeof mergedParams === 'string') ? { message: mergedParams } : mergedParams;
 
   instance = new NotificationConstructor({
     propsData: {
       ...propsData,
       value: false, // required prop
       position: positionName,
-      verticalOffset: getVerticalOffset(instances, positionName, params),
+      verticalOffset: getVerticalOffset(instances, positionName, mergedParams),
     },
     mounted () {
       this.$on('input', value => {
@@ -108,6 +110,22 @@ function getVerticalOffset (instances, position, { offset = 0 } = {}) {
       offset += item.$el.offsetHeight + 16;
       return offset;
     }, offset);
+}
+
+function mergeOptionsWithParams (options, params) {
+  if (!options.breakpoints) return params;
+
+  const windowWidth = window.innerWidth;
+  let match = -1;
+  Object.keys(options.breakpoints).forEach(breakpoint => {
+    console.log(breakpoint <= windowWidth);
+    if (breakpoint <= windowWidth && breakpoint > match) {
+      match = Number(breakpoint);
+    }
+  });
+
+  const paramsToMerge = (typeof params === 'string') ? { message: params } : params;
+  return Object.assign({}, options.breakpoints[match], paramsToMerge);
 }
 
 export default Notification;

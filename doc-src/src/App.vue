@@ -41,9 +41,56 @@
         </CodeWrapper>
 
         <div class="title">
+          <h2> Load component with Options </h2>
+        </div>
+
+        <!---------------------------------------------------------->
+        <!-- EXAMPLE : Options -->
+        <!---------------------------------------------------------->
+        <Wrapper background-color="white" class="column justify-center align-center">
+            <template v-slot:description>
+              <h3> Options </h3>
+              <p><small> Breakpoints options when init VueNotification </small></p>
+            </template>
+
+            <template v-slot:example>
+              <button type="button" @click="$notify(message)"> Show notification </button>
+            </template>
+
+            <template v-slot:code>
+              <CodeWrapper type="javascript">
+<span class="token keyword">Vue</span><span class="token function">.use(</span>VueNotification, {
+  breakpoints: {
+    0: {
+      bottom: true,
+    },
+    480: {
+      top: true,
+      right: true,
+    },
+  },
+}<span class="token function">)</span>;
+
+<span class="token operator">&lt;</span>script<span class="token operator">></span>
+  ...
+  methods<span class="token ponctuation">:</span> {
+    showNotification <span class="token ponctuation">()</span> {
+      <span class="token keyword">this</span><span class="token ponctuation">.</span>$notify(<span class="token keyword">this</span>.message);
+    },
+  }
+  ...
+<span class="token operator">&lt;/</span>script<span class="token operator">></span>
+</CodeWrapper>
+            </template>
+        </Wrapper>
+
+        <div class="title">
           <h2> Examples (props) </h2>
         </div>
 
+        <!---------------------------------------------------------->
+        <!-- EXAMPLE : Default -->
+        <!---------------------------------------------------------->
         <Wrapper background-color="white" class="column justify-center align-center">
           <template v-slot:description>
             <h3> Default </h3>
@@ -106,6 +153,9 @@
           </template>
       </Wrapper>
 
+      <!---------------------------------------------------------->
+      <!-- EXAMPLE : Types -->
+      <!---------------------------------------------------------->
       <Wrapper background-color="white" class="column justify-center align-center">
           <template v-slot:description>
             <h3> Types </h3>
@@ -157,6 +207,9 @@
           </template>
       </Wrapper>
 
+      <!---------------------------------------------------------->
+      <!-- EXAMPLE : Hide Icon -->
+      <!---------------------------------------------------------->
       <Wrapper background-color="white" class="column justify-center align-center">
           <template v-slot:description>
             <h3> Hide Icon </h3>
@@ -205,6 +258,9 @@
           </template>
       </Wrapper>
 
+      <!---------------------------------------------------------->
+      <!-- EXAMPLE : MultiLine -->
+      <!---------------------------------------------------------->
       <Wrapper background-color="white" class="column justify-center align-center">
           <template v-slot:description>
             <h3> MultiLine </h3>
@@ -244,6 +300,9 @@
           </template>
       </Wrapper>
 
+      <!---------------------------------------------------------->
+      <!-- EXAMPLE : Offset -->
+      <!---------------------------------------------------------->
       <Wrapper background-color="white" class="column justify-center align-center">
           <template v-slot:description>
             <h3> Offset </h3>
@@ -283,6 +342,9 @@
           </template>
       </Wrapper>
 
+      <!---------------------------------------------------------->
+      <!-- EXAMPLE : actionText & onActionClick -->
+      <!---------------------------------------------------------->
       <Wrapper background-color="white" class="column justify-center align-center">
           <template v-slot:description>
             <h3> actionText & onActionClick </h3>
@@ -327,6 +389,9 @@
           </template>
       </Wrapper>
 
+      <!---------------------------------------------------------->
+      <!-- EXAMPLE : showClose -->
+      <!---------------------------------------------------------->
       <Wrapper background-color="white" class="column justify-center align-center">
           <template v-slot:description>
             <h3> showClose </h3>

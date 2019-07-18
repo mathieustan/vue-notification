@@ -1,7 +1,7 @@
 import { shallowMount } from '@vue/test-utils';
 import NotificationItem from '@/components/Notification/NotificationItem.vue';
 
-import { Z_INDEX_LIST } from '../../../../src/constants';
+import { Z_INDEX_LIST, NOTIFICATION_ICONS } from '../../../../src/constants';
 
 jest.useFakeTimers();
 
@@ -11,6 +11,7 @@ describe('NotificationItem', () => {
   beforeEach(() => {
     mountComponent = ({
       value = true,
+      type,
       position,
       absolute,
       top,
@@ -22,6 +23,7 @@ describe('NotificationItem', () => {
       shallowMount(NotificationItem, {
         propsData: {
           value,
+          type,
           position,
           absolute,
           top,
@@ -114,6 +116,35 @@ describe('NotificationItem', () => {
           ...expectedResult,
           zIndex: Z_INDEX_LIST.notification,
         });
+      });
+    });
+
+    describe('iconType', () => {
+      it.each([
+        [undefined, undefined],
+        ['success', {
+          height: 16,
+          path: NOTIFICATION_ICONS.success.path,
+          viewBox: NOTIFICATION_ICONS.success.viewBox,
+        }],
+        ['info', {
+          height: 14,
+          path: NOTIFICATION_ICONS.info.path,
+          viewBox: NOTIFICATION_ICONS.info.viewBox,
+        }],
+        ['warning', {
+          height: 14,
+          path: NOTIFICATION_ICONS.warning.path,
+          viewBox: NOTIFICATION_ICONS.warning.viewBox,
+        }],
+        ['error', {
+          height: 16,
+          path: NOTIFICATION_ICONS.error.path,
+          viewBox: NOTIFICATION_ICONS.error.viewBox,
+        }],
+      ])('when type = %p, should return %p', (type, expectedResult) => {
+        const wrapper = mountComponent({ type });
+        expect(wrapper.vm.iconType).toEqual(expectedResult);
       });
     });
   });

@@ -7,20 +7,20 @@
       v-on="$listeners"
       ref="notification"
       class="notification">
-      <div
-        :style="{ 'backgroundColor': color }"
-        class="notification__wrapper">
+      <div class="notification__wrapper">
         <div class="notification__content">
           <span class="notification__message">
-            <span v-if="type && NOTIFICATION_ICONS[type] && !hideIcon" class="notification__icon">
+            <span v-if="Boolean(iconType) && !hideIcon" class="notification__icon">
               <svg
-                :viewBox="NOTIFICATION_ICONS[type].viewBox"
+                :viewBox="iconType.viewBox"
+                :width="iconType.width"
+                :height="iconType.height"
                 role="img"
                 xmlns="http://www.w3.org/2000/svg">
-                <path fill="currentColor" :d="NOTIFICATION_ICONS[type].path" />
+                <path fill="currentColor" :d="iconType.path" />
               </svg>
             </span>
-            <p>{{ message }} </p>
+            <p class="notification__text">{{ message }} </p>
           </span>
           <button
             v-if="actionText"
@@ -103,6 +103,9 @@ export default {
         zIndex: this.zIndex,
         [this.verticalProperty]: `${this.verticalOffset}px`,
       };
+    },
+    iconType () {
+      return this.type && NOTIFICATION_ICONS[this.type];
     },
   },
   beforeDestroy () {
@@ -235,7 +238,7 @@ export default {
 
     &--multi-line &__content {
       height: 80px;
-      padding: 24px;
+      padding: ($gutter*3);
     }
 
     &__message {
@@ -307,7 +310,9 @@ export default {
       align-items: center;
       border-radius: get-border-radius(1);
       width: 26px;
+      min-width: 26px;
       height: 26px;
+      min-height: 26px;
       margin-right: ($gutter*2);
 
       .notification--success & {
@@ -325,8 +330,7 @@ export default {
 
       svg {
         position: relative;
-        width: 16px;
-        height: 16px;
+        width: auto;
       }
     }
   }
