@@ -231,14 +231,14 @@ export default {
       align-items: center;
       justify-content: space-between;
       width: 100%;
-      height: 48px;
-      padding: ($gutter*2) ($gutter*3);
+      min-height: 48px;
+      padding: $gutter ($gutter*3);
       overflow: hidden;
     }
 
     &--multi-line &__content {
-      height: 80px;
-      padding: ($gutter*3);
+      min-height: 80px;
+      padding: ($gutter*2) ($gutter*3);
     }
 
     &__message {
