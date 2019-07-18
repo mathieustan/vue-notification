@@ -1384,7 +1384,10 @@ function getVerticalOffset(instances, position) {
 }
 
 function mergeOptionsWithParams(options, params) {
-  if (!options.breakpoints) { return params; }
+  var paramsToMerge = typeof params === 'string' ? {
+    message: params
+  } : params;
+  if (!options.breakpoints) { return paramsToMerge; }
   var windowWidth = window.innerWidth;
   var match = -1;
   Object.keys(options.breakpoints).forEach(function (breakpoint) {
@@ -1392,9 +1395,7 @@ function mergeOptionsWithParams(options, params) {
       match = Number(breakpoint);
     }
   });
-  var paramsToMerge = typeof params === 'string' ? {
-    message: params
-  } : params;
+  if (match === -1) { return paramsToMerge; }
   return Object.assign({}, options.breakpoints[match], paramsToMerge);
 }
 
@@ -1407,7 +1408,7 @@ var install = function install(Vue) {
 
 var plugin = {
   // eslint-disable-next-line no-undef
-  version: "0.1.1-rc.2",
+  version: "0.1.1-rc.3",
   install: install,
   Notification: Notification
 };

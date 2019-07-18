@@ -113,7 +113,8 @@ function getVerticalOffset (instances, position, { offset = 0 } = {}) {
 }
 
 function mergeOptionsWithParams (options, params) {
-  if (!options.breakpoints) return params;
+  const paramsToMerge = typeof params === 'string' ? { message: params } : params;
+  if (!options.breakpoints) return paramsToMerge;
 
   const windowWidth = window.innerWidth;
   let match = -1;
@@ -123,7 +124,8 @@ function mergeOptionsWithParams (options, params) {
     }
   });
 
-  const paramsToMerge = (typeof params === 'string') ? { message: params } : params;
+  if (match === -1) return paramsToMerge;
+
   return Object.assign({}, options.breakpoints[match], paramsToMerge);
 }
 
