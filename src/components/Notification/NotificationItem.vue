@@ -67,6 +67,8 @@ export default {
     position: { type: String, default: String },
     // Makes the notification higher (mobile)
     multiLine: { type: Boolean, default: false },
+    // Makes the notification full width like in mobile
+    fullWidth: { type: Boolean, default: false },
     // Offset to show notification
     verticalOffset: { type: Number, default: 16 },
     // Delay before closing notification
@@ -93,6 +95,7 @@ export default {
         'notification--left': this.left,
         'notification--right': this.right,
         'notification--top': this.top,
+        'notification--full-width': this.fullWidth,
       };
     },
     verticalProperty () {
@@ -174,13 +177,15 @@ export default {
     &--left,
     &--right {
       @include mq(phone) {
-        margin: 0 ($gutter*3);
+        &:not(.notification--full-width) {
+          margin: 0 ($gutter*3);
 
-        &.notification--top {
-          transform: translateY($gutter*3);
-        }
-        &.notification--bottom {
-          transform: translateY(0 - ($gutter*3));
+          &.notification--top {
+            transform: translateY($gutter*3);
+          }
+          &.notification--bottom {
+            transform: translateY(0 - ($gutter*3));
+          }
         }
       }
     }
@@ -208,6 +213,9 @@ export default {
       .notification--error & {
         background-color: color(other, pink);
       }
+      .notification--offline & {
+        background-color: color(other, pink);
+      }
 
       @include mq(phone) {
         width: auto;
@@ -217,10 +225,16 @@ export default {
         border-radius: get-border-radius(1);
 
         .notification--left & {
-          margin-left: 0
+          margin-left: 0;
         }
         .notification--right & {
-          margin-right: 0
+          margin-right: 0;
+        }
+
+        .notification--full-width & {
+          width: 100%;
+          max-width: 100%;
+          border-radius: 0;
         }
       }
     }
@@ -327,6 +341,9 @@ export default {
       .notification--error & {
         background-color: darken(color(other, pink), 10%);
       }
+      .notification--offline & {
+        background-color: darken(color(other, pink), 10%);
+      }
 
       svg {
         position: relative;
@@ -365,10 +382,10 @@ export default {
         transform: translateY(calc(-100% - 8px));
 
         @include mq(phone) {
-          &.notification--right {
+          &.notification--right:not(.notification--full-width) {
             transform: translateY($gutter*3) translateX(calc(100% + 8px));
           }
-          &.notification--left {
+          &.notification--left:not(.notification--full-width) {
             transform: translateY($gutter*3) translateX(calc(-100% - 8px));
           }
         }
@@ -377,10 +394,10 @@ export default {
         transform: translateY(100%);
 
         @include mq(phone) {
-          &.notification--right {
+          &.notification--right:not(.notification--full-width) {
             transform: translateY(0 - ($gutter*3)) translateX(calc(100% + 8px));
           }
-          &.notification--left {
+          &.notification--left:not(.notification--full-width) {
             transform: translateY(0 - ($gutter*3)) translateX(calc(-100% - 8px));
           }
         }

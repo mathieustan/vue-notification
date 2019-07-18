@@ -19,6 +19,7 @@ describe('NotificationItem', () => {
       right,
       left,
       multiLine,
+      fullWidth,
     } = {}) =>
       shallowMount(NotificationItem, {
         propsData: {
@@ -31,6 +32,7 @@ describe('NotificationItem', () => {
           right,
           left,
           multiLine,
+          fullWidth,
         },
       });
   });
@@ -59,7 +61,7 @@ describe('NotificationItem', () => {
     describe('classes', () => {
       it.each([
         [
-          { value: true, absolute: false, top: true, bottom: false, right: false, left: false },
+          { value: true, absolute: false, top: true, bottom: false, right: false, left: false, fullWidth: true },
           {
             'notification--active': true,
             'notification--multi-line': false,
@@ -68,6 +70,7 @@ describe('NotificationItem', () => {
             'notification--left': false,
             'notification--right': false,
             'notification--top': true,
+            'notification--full-width': true,
           },
         ],
         [
@@ -80,6 +83,7 @@ describe('NotificationItem', () => {
             'notification--left': false,
             'notification--right': true,
             'notification--top': true,
+            'notification--full-width': false,
           },
         ],
       ])('when props = %p, should return %p', (props, expectedResult) => {
@@ -141,6 +145,11 @@ describe('NotificationItem', () => {
           height: 16,
           path: NOTIFICATION_ICONS.error.path,
           viewBox: NOTIFICATION_ICONS.error.viewBox,
+        }],
+        ['offline', {
+          height: 14,
+          path: NOTIFICATION_ICONS.offline.path,
+          viewBox: NOTIFICATION_ICONS.offline.viewBox,
         }],
       ])('when type = %p, should return %p', (type, expectedResult) => {
         const wrapper = mountComponent({ type });

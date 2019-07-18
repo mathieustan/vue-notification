@@ -442,6 +442,41 @@
           </template>
       </Wrapper>
 
+      <!---------------------------------------------------------->
+      <!-- EXAMPLE : fullWidth -->
+      <!---------------------------------------------------------->
+      <Wrapper background-color="white" class="column justify-center align-center">
+          <template v-slot:description>
+            <h3> fullWidth </h3>
+            <p><small> Force to show a full width notification </small></p>
+          </template>
+
+          <template v-slot:example>
+            <button
+              type="button"
+              @click="showNotification({ fullWidth: true  })">
+              Show a full width notification
+            </button>
+          </template>
+
+          <template v-slot:code>
+            <CodeWrapper type="javascript">
+<span class="token operator">&lt;</span>script<span class="token operator">></span>
+  ...
+  methods<span class="token ponctuation">:</span> {
+    showNotification <span class="token ponctuation">()</span> {
+      <span class="token keyword">this</span><span class="token ponctuation">.</span>$notify({
+        <span class="token attr-name">message</span>: "{{message}}"
+        <span class="token attr-name">fullWidth</span>: true,
+      });
+    },
+  }
+  ...
+<span class="token operator">&lt;/</span>script<span class="token operator">></span>
+</CodeWrapper>
+          </template>
+      </Wrapper>
+
       </div>
     </div>
   </div>
@@ -469,8 +504,10 @@ export default {
       { name: 'info', value: 'info' },
       { name: 'warning', value: 'warning' },
       { name: 'error', value: 'error' },
+      { name: 'offline', value: 'offline' },
     ],
     showClose: false,
+    fullWidth: false,
   }),
   methods: {
     showNotification ({
@@ -481,6 +518,7 @@ export default {
       onActionClick,
       hideIcon,
       showClose,
+      fullWidth,
     } = {}) {
       this.$notify({
         message: this.message,
@@ -496,6 +534,7 @@ export default {
         onActionClick,
         hideIcon,
         showClose: showClose || this.showClose,
+        fullWidth: fullWidth || this.fullWidth,
       });
     },
   },
