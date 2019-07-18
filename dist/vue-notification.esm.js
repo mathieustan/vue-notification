@@ -1333,9 +1333,9 @@ Notification.close = function (id) {
 };
 
 Notification.closeAll = function () {
-  instances.forEach(function (instance) {
-    instance.close();
-  });
+  for (var i = instances.length - 1; i >= 0; i--) {
+    instances[i].close(instances[i].id);
+  }
 }; // -----------------------------------------
 // Helpers
 // - getPositionsFromOptions : pick top, left, bottom, right from params
@@ -1375,8 +1375,6 @@ function mergeOptionsWithParams(options, params) {
   var windowWidth = window.innerWidth;
   var match = -1;
   Object.keys(options.breakpoints).forEach(function (breakpoint) {
-    console.log(breakpoint <= windowWidth);
-
     if (breakpoint <= windowWidth && breakpoint > match) {
       match = Number(breakpoint);
     }

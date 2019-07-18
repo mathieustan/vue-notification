@@ -79,10 +79,10 @@ Notification.close = id => {
   }
 };
 
-Notification.closeAll = function () {
-  instances.forEach(instance => {
-    instance.close();
-  });
+Notification.closeAll = () => {
+  for (let i = instances.length - 1; i >= 0; i--) {
+    instances[i].close(instances[i].id);
+  }
 };
 
 // -----------------------------------------
@@ -118,7 +118,6 @@ function mergeOptionsWithParams (options, params) {
   const windowWidth = window.innerWidth;
   let match = -1;
   Object.keys(options.breakpoints).forEach(breakpoint => {
-    console.log(breakpoint <= windowWidth);
     if (breakpoint <= windowWidth && breakpoint > match) {
       match = Number(breakpoint);
     }
