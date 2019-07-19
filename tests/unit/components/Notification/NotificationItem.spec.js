@@ -158,27 +158,6 @@ describe('NotificationItem', () => {
     });
   });
 
-  describe('beforeDestroy', () => {
-    it('should do nothing if $refs.notification isn\'t defined', () => {
-      const wrapper = mountComponent();
-      wrapper.vm.$refs = {};
-      wrapper.destroy();
-      expect(wrapper.vm.$refs.notification).toEqual(undefined);
-    });
-
-    it('should remove element from Dom ONLY IF $refs.notification is defined', () => {
-      const wrapper = mountComponent();
-      wrapper.vm.$refs = {
-        notification: {
-          parentNode: { removeChild: jest.fn(() => true) },
-        },
-      };
-
-      wrapper.destroy();
-      expect(wrapper.vm.$refs.notification.parentNode.removeChild).toHaveBeenCalled();
-    });
-  });
-
   describe('watch', () => {
     describe('isActive', () => {
       it('should call setTimeout and set isActive to false', async () => {
@@ -193,6 +172,20 @@ describe('NotificationItem', () => {
   });
 
   describe('methods', () => {
+    describe('destroyElement', () => {
+      it('should destroy component & remove it from DOM', () => {
+        const wrapper = mountComponent({ value: true });
+        Object.defineProperty(
+          wrapper.element,
+          'parentNode',
+          { value: { removeChild: jest.fn(() => true) } },
+        );
+
+        wrapper.vm.destroyElement();
+        expect(wrapper.element.parentNode.removeChild).toHaveBeenCalled();
+      });
+    });
+
     describe('close', () => {
       it('should set isActive to false', () => {
         const wrapper = mountComponent({ value: true });

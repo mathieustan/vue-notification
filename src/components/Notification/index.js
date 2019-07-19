@@ -9,17 +9,16 @@ let instance;
 let instances = [];
 let seed = 1;
 
-const Notification = (params = { top: true, bottom: false, left: true, right: false }) => {
-  const mergedParams = mergeOptionsWithParams(Notification.options, params);
-
+const Notification = (params = {}) => {
+  const options = Notification.options || {};
+  const mergedParams = mergeOptionsWithParams(options, params);
   const id = 'notification_' + seed++;
   const positions = getPositionsFromOptions(mergedParams);
   const positionName = setPositionName(positions);
-  const propsData = (typeof mergedParams === 'string') ? { message: mergedParams } : mergedParams;
 
   instance = new NotificationConstructor({
     propsData: {
-      ...propsData,
+      ...mergedParams,
       value: false, // required prop
       position: positionName,
       verticalOffset: getVerticalOffset(instances, positionName, mergedParams),
@@ -81,7 +80,7 @@ Notification.close = id => {
 
 Notification.closeAll = () => {
   for (let i = instances.length - 1; i >= 0; i--) {
-    instances[i].close(instances[i].id);
+    instances[i].close();
   }
 };
 
@@ -103,7 +102,7 @@ function setPositionName (positions) {
     .join('-');
 }
 
-function getVerticalOffset (instances, position, { offset = 0 } = {}) {
+function getVerticalOffset (instances, position, { offset = 0 }) {
   return instances
     .filter(item => item.position === position)
     .reduce((offset, item) => {

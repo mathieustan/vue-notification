@@ -1,7 +1,10 @@
 <template>
-  <transition name="notification-transition">
+  <transition
+    name="notification-transition"
+    @after-leave="destroyElement"
+  >
     <div
-      v-if="isActive"
+      v-show="isActive"
       :style="positionStyle"
       :class="[this.type && `notification--${this.type}`, this.classes]"
       v-on="$listeners"
@@ -111,10 +114,6 @@ export default {
       return this.type && NOTIFICATION_ICONS[this.type];
     },
   },
-  beforeDestroy () {
-    if (!this.$refs.notification) return;
-    this.$refs.notification.parentNode.removeChild(this.$refs.notification);
-  },
   watch: {
     isActive: {
       async handler () {
@@ -131,6 +130,10 @@ export default {
       this.activeTimeout = setTimeout(() => {
         this.isActive = false;
       }, this.closeDelay);
+    },
+    destroyElement () {
+      this.$destroy(true);
+      this.$el.parentNode.removeChild(this.$el);
     },
     close () {
       this.isActive = false;

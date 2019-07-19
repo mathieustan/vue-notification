@@ -145,6 +145,7 @@
 
           <template v-slot:example>
             <button type="button" @click="showNotification()"> Show notification </button>
+            <button type="button" @click="$notify.closeAll()"> Close all </button>
           </template>
 
           <template v-slot:code>
