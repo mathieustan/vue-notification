@@ -31,7 +31,7 @@ yarn add @mathieustan/vue-notification
 import VueNotification from '@mathieustan/vue-notification';
 Vue.use(VueNotification);
 
-// breakpoint example
+// Or with options (like breakpoints)
 Vue.use(VueNotification, {
   breakpoints: {
     0: {
@@ -105,15 +105,15 @@ Theme object looks like this :point_down:
 }
 ```
 
-There are two way to update theme.
-1\.  Options when init VueNotification
+**Examples : There are two ways to update theme.**
+
+1.  Options when init VueNotification
 
 ```javascript
 import VueNotification from '@mathieustan/vue-notification';
-Vue.use(VueNotification);
-
 Vue.use(VueNotification, {
   theme: {
+    // darken colors are used for background on icon
     colors: {
       success: '#54d861',
       darkenSuccess: '#2d8e36',
@@ -134,22 +134,31 @@ Vue.use(VueNotification, {
 2.  Theme properties when calling $notify
 
 ```javascript
-this.$notify({
-  message: 'Hello Wolrd',
-  theme: {
-    colors: {
-      success: '#54d861',
-      darkenSuccess: '#2d8e36',
-      info: '#5d6a89',
-      darkenInfo: '#535f7b',
-      warning: '#f8a623',
-      darkenWarning: '#f69a07',
-      error: '#ff4577',
-      darkenError: '#ff245f',
-      offline: '#ff4577',
-      darkenOffline: '#ff245f',
+<script>
+export default {
+  // ...
+  methods: {
+    showNotification () {
+      this.$notify({
+        message: 'Hello Wolrd',
+        theme: {
+          colors: {
+            success: '#54d861',
+            darkenSuccess: '#2d8e36',
+            info: '#5d6a89',
+            darkenInfo: '#535f7b',
+            warning: '#f8a623',
+            darkenWarning: '#f69a07',
+            error: '#ff4577',
+            darkenError: '#ff245f',
+            offline: '#ff4577',
+            darkenOffline: '#ff245f',
+          },
+          boxShadow: '10px 5px 5px red',
+        },
+      });
     },
-    boxShadow: '10px 5px 5px red',
   },
-});
+  //...
+};
 ```
