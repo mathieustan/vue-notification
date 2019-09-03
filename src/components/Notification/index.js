@@ -1,7 +1,11 @@
 import Vue from 'vue';
 import NotificationItem from './NotificationItem.vue';
 
-import { NOTIFICATION_POSITIONS, NOTIFICATION_TYPES } from '../../constants';
+import {
+  NOTIFICATION_POSITIONS,
+  NOTIFICATION_TYPES,
+  NOTIFICATION_THEME,
+} from '../../constants';
 
 const NotificationConstructor = Vue.extend(NotificationItem);
 
@@ -113,8 +117,9 @@ function getVerticalOffset (instances, position, { offset = 0 }) {
 
 function mergeOptionsWithParams (options, params) {
   const paramsToMerge = typeof params === 'string' ? { message: params } : params;
-  if (!options.breakpoints) return paramsToMerge;
+  const theme = Object.assign({}, NOTIFICATION_THEME, options.theme, params.theme);
 
+  if (!options.breakpoints) return { ...paramsToMerge, theme };
   const windowWidth = window.innerWidth;
   let match = -1;
   Object.keys(options.breakpoints).forEach(breakpoint => {
@@ -125,7 +130,7 @@ function mergeOptionsWithParams (options, params) {
 
   if (match === -1) return paramsToMerge;
 
-  return Object.assign({}, options.breakpoints[match], paramsToMerge);
+  return Object.assign({}, options.breakpoints[match], { ...paramsToMerge, theme });
 }
 
 export default Notification;

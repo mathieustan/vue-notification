@@ -9,6 +9,7 @@
 -   [Install](#install)
 -   [Usage](#usage)
 -   [Props](#available-props)
+-   [Theme](#theme)
 
 ## Demo
 
@@ -30,7 +31,7 @@ yarn add @mathieustan/vue-notification
 import VueNotification from '@mathieustan/vue-notification';
 Vue.use(VueNotification);
 
-// With breakpoints options
+// breakpoint example
 Vue.use(VueNotification, {
   breakpoints: {
     0: {
@@ -77,3 +78,78 @@ export default {
 | showClose     | Boolean  | false   | Will add a close button                                                       |
 | hideIcon      | Boolean  | false   | Allow to hide icon for types (success,info,...)                               |
 | fullWidth     | Boolean  | false   | Force notification to full width                                              |
+| theme         | Object   | false   | Update default theme (More informations here [Theme](#theme))                 |
+
+## Theme
+
+:rocket: It's now possible to surcharge default theme colors & box-shadow.
+Theme object looks like this :point_down:
+
+```javascript
+{
+  colors: {
+    success: '#4f88ff',
+    successDarken: '#2d71fe',
+    info: '#5d6a89',
+    infoDarken: '#535f7b',
+    warning: '#f8a623',
+    warningDarken: '#f69a07',
+    error: '#ff4577',
+    errorDarken: '#ff245f',
+    offline: '#ff4577',
+    offlineDarken: '#ff245f',
+  },
+  boxShadow: `0px 3px 5px -1px rgba(0,0,0,0.2),
+    0px 6px 10px 0px rgba(0,0,0,0.14),
+    0px 1px 18px 0px rgba(0,0,0,0.12)`,
+}
+```
+
+There are two way to update theme.
+1\.  Options when init VueNotification
+
+```javascript
+import VueNotification from '@mathieustan/vue-notification';
+Vue.use(VueNotification);
+
+Vue.use(VueNotification, {
+  theme: {
+    colors: {
+      success: '#54d861',
+      darkenSuccess: '#2d8e36',
+      info: '#5d6a89',
+      darkenInfo: '#535f7b',
+      warning: '#f8a623',
+      darkenWarning: '#f69a07',
+      error: '#ff4577',
+      darkenError: '#ff245f',
+      offline: '#ff4577',
+      darkenOffline: '#ff245f',
+    },
+    boxShadow: '10px 5px 5px red',
+  },
+});
+```
+
+2.  Theme properties when calling $notify
+
+```javascript
+this.$notify({
+  message: 'Hello Wolrd',
+  theme: {
+    colors: {
+      success: '#54d861',
+      darkenSuccess: '#2d8e36',
+      info: '#5d6a89',
+      darkenInfo: '#535f7b',
+      warning: '#f8a623',
+      darkenWarning: '#f69a07',
+      error: '#ff4577',
+      darkenError: '#ff245f',
+      offline: '#ff4577',
+      darkenOffline: '#ff245f',
+    },
+    boxShadow: '10px 5px 5px red',
+  },
+});
+```

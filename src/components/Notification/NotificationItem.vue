@@ -10,10 +10,15 @@
       v-on="$listeners"
       ref="notification"
       class="notification">
-      <div class="notification__wrapper">
+      <div
+        :style="wrapperStyle"
+        class="notification__wrapper">
         <div class="notification__content">
           <span class="notification__message">
-            <span v-if="Boolean(iconType) && !hideIcon" class="notification__icon">
+            <span
+              v-if="Boolean(iconType) && !hideIcon"
+              :style="iconStyle"
+              class="notification__icon">
               <svg
                 :viewBox="iconType.viewBox"
                 :width="iconType.width"
@@ -55,7 +60,7 @@ import positionable from '../../mixins/positionable';
 import toggleable from '../../mixins/toggleable';
 import colorable from '../../mixins/colorable';
 
-import { Z_INDEX_LIST, NOTIFICATION_ICONS } from '../../constants';
+import { Z_INDEX_LIST, NOTIFICATION_ICONS, NOTIFICATION_THEME } from '../../constants';
 
 export default {
   name: 'NotificationItem',
@@ -81,6 +86,8 @@ export default {
     onActionClick: { type: Function, default: undefined },
     // show a close button
     showClose: { type: Boolean, default: false },
+    // Theme
+    theme: { type: Object, default: () => NOTIFICATION_THEME },
     // zindex
     zIndex: { type: Number, default: Z_INDEX_LIST.notification },
   },
@@ -108,6 +115,19 @@ export default {
       return {
         zIndex: this.zIndex,
         [this.verticalProperty]: `${this.verticalOffset}px`,
+      };
+    },
+    wrapperStyle () {
+      const { colors, boxShadow } = this.theme;
+      return {
+        ...(colors && this.setBackgroundColor(colors[this.type])),
+        ...(boxShadow && { 'box-shadow': boxShadow }),
+      };
+    },
+    iconStyle () {
+      const { colors } = this.theme;
+      return {
+        ...(colors && this.setBackgroundColor(colors[`${this.type}Darken`])),
       };
     },
     iconType () {
@@ -142,16 +162,17 @@ export default {
 };
 </script>
 
-<style>
-  *, ::before, ::after {
-    box-sizing: border-box;
-  }
-</style>
-
 <style lang="scss" scoped>
   @import   '../../styles/abstracts/functions',
             '../../styles/abstracts/variables',
             '../../styles/abstracts/mixins';
+
+  .notification
+  .notification *,
+  .notification ::before,
+  .notification ::after {
+    box-sizing: border-box;
+  }
 
   .notification {
     position: fixed;
@@ -200,25 +221,6 @@ export default {
       width: 100%;
       background-color: black;
       pointer-events: auto;
-      box-shadow: 0px 3px 5px -1px rgba(0,0,0,0.2),
-        0px 6px 10px 0px rgba(0,0,0,0.14),
-        0px 1px 18px 0px rgba(0,0,0,0.12);
-
-      .notification--success & {
-        background-color: color(other, blue);
-      }
-      .notification--info & {
-        background-color: color(other, dark-gray);
-      }
-      .notification--warning & {
-        background-color: color(other, orange);
-      }
-      .notification--error & {
-        background-color: color(other, pink);
-      }
-      .notification--offline & {
-        background-color: color(other, pink);
-      }
 
       @include mq(phone) {
         width: auto;
@@ -331,22 +333,6 @@ export default {
       height: 26px;
       min-height: 26px;
       margin-right: ($gutter*2);
-
-      .notification--success & {
-        background-color: darken(color(other, blue), 10%);
-      }
-      .notification--info & {
-        background-color: darken(color(other, dark-gray), 5%);
-      }
-      .notification--warning & {
-        background-color: darken(color(other, orange), 10%);
-      }
-      .notification--error & {
-        background-color: darken(color(other, pink), 10%);
-      }
-      .notification--offline & {
-        background-color: darken(color(other, pink), 10%);
-      }
 
       svg {
         position: relative;

@@ -50,16 +50,33 @@
         <Wrapper background-color="white" class="column justify-center align-center">
             <template v-slot:description>
               <h3> Options </h3>
-              <p><small> Breakpoints options when init VueNotification </small></p>
+              <p><small> Theme & breakpoint options when init VueNotification </small></p>
             </template>
 
             <template v-slot:example>
-              <button type="button" @click="$notify(message)"> Show notification </button>
+              <button type="button" @click="$notify.success({ message, theme })">
+                Show success notification with options surcharged
+              </button>
             </template>
 
             <template v-slot:code>
               <CodeWrapper type="javascript">
 <span class="token keyword">Vue</span><span class="token function">.use(</span>VueNotification, {
+  theme: {
+    colors: {
+      success: '#54d861',
+      darkenSuccess: '#2d8e36',
+      info: '#5d6a89',
+      darkenInfo: '#535f7b',
+      warning: '#f8a623',
+      darkenWarning: '#f69a07',
+      error: '#ff4577',
+      darkenError: '#ff245f',
+      offline: '#ff4577',
+      darkenOffline: '#ff245f',
+    },
+    boxShadow: '10px 5px 5px red',
+  },
   breakpoints: {
     0: {
       bottom: true,
@@ -201,6 +218,11 @@
               type="button"
               @click="showNotification({ type: 'error' })">
               Error notification
+            </button>
+            <button
+              type="button"
+              @click="showNotification({ type: 'offline' })">
+              Offline notification
             </button>
           </template>
 
@@ -492,6 +514,21 @@ export default {
   name: 'App',
   components: { CodeWrapper, Wrapper, Checkbox },
   data: () => ({
+    theme: {
+      colors: {
+        success: '#54d861',
+        darkenSuccess: '#2d8e36',
+        info: '#5d6a89',
+        darkenInfo: '#535f7b',
+        warning: '#f8a623',
+        darkenWarning: '#f69a07',
+        error: '#ff4577',
+        darkenError: '#ff245f',
+        offline: '#ff4577',
+        darkenOffline: '#ff245f',
+      },
+      boxShadow: '10px 5px 5px red',
+    },
     closeDelay: 4500,
     vertical: 'top',
     horizontal: 'left',

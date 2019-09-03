@@ -1,7 +1,7 @@
 import { shallowMount } from '@vue/test-utils';
 import NotificationItem from '@/components/Notification/NotificationItem.vue';
 
-import { Z_INDEX_LIST, NOTIFICATION_ICONS } from '../../../../src/constants';
+import { Z_INDEX_LIST, NOTIFICATION_ICONS, NOTIFICATION_THEME } from '../../../../src/constants';
 
 jest.useFakeTimers();
 
@@ -20,6 +20,7 @@ describe('NotificationItem', () => {
       left,
       multiLine,
       fullWidth,
+      theme,
     } = {}) =>
       shallowMount(NotificationItem, {
         propsData: {
@@ -33,6 +34,7 @@ describe('NotificationItem', () => {
           left,
           multiLine,
           fullWidth,
+          theme,
         },
       });
   });
@@ -121,6 +123,47 @@ describe('NotificationItem', () => {
           zIndex: Z_INDEX_LIST.notification,
         });
       });
+    });
+
+    describe('wrapperStyle', () => {
+      it.each([
+        [undefined, undefined, { 'box-shadow': NOTIFICATION_THEME.boxShadow }],
+        [undefined, 'success', {
+          'background-color': NOTIFICATION_THEME.colors.success,
+          'border-color': NOTIFICATION_THEME.colors.success,
+          'box-shadow': NOTIFICATION_THEME.boxShadow,
+        }],
+        [{ colors: { success: '#FFFFFF' } }, 'success', {
+          'background-color': '#FFFFFF',
+          'border-color': '#FFFFFF',
+        }],
+      ])(
+        'when theme = %p & type = %p, should return %p',
+        (theme, type, expectedResult) => {
+          const wrapper = mountComponent({ theme, type });
+          expect(wrapper.vm.wrapperStyle).toEqual(expectedResult);
+        },
+      );
+    });
+
+    describe('iconStyle', () => {
+      it.each([
+        [undefined, undefined, {}],
+        [undefined, 'success', {
+          'background-color': NOTIFICATION_THEME.colors.successDarken,
+          'border-color': NOTIFICATION_THEME.colors.successDarken,
+        }],
+        [{ colors: { successDarken: '#FFFFFF' } }, 'success', {
+          'background-color': '#FFFFFF',
+          'border-color': '#FFFFFF',
+        }],
+      ])(
+        'when theme = %p & type = %p, should return %p',
+        (theme, type, expectedResult) => {
+          const wrapper = mountComponent({ theme, type });
+          expect(wrapper.vm.iconStyle).toEqual(expectedResult);
+        },
+      );
     });
 
     describe('iconType', () => {
