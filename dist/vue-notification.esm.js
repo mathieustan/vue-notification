@@ -958,7 +958,27 @@ var NOTIFICATION_ICONS = {
   }),
   close: _objectSpread({}, ICONS.close)
 };
+var NOTIFICATION_THEME = {
+  colors: {
+    success: '#4f88ff',
+    successDarken: '#2d71fe',
+    info: '#5d6a89',
+    infoDarken: '#535f7b',
+    warning: '#f8a623',
+    warningDarken: '#f69a07',
+    error: '#ff4577',
+    errorDarken: '#ff245f',
+    offline: '#ff4577',
+    offlineDarken: '#ff245f'
+  },
+  boxShadow: "0px 3px 5px -1px rgba(0,0,0,0.2),\n    0px 6px 10px 0px rgba(0,0,0,0.14),\n    0px 1px 18px 0px rgba(0,0,0,0.12)"
+};
 
+function ownKeys$1(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { keys.push.apply(keys, Object.getOwnPropertySymbols(object)); } if (enumerableOnly) { keys = keys.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } return keys; }
+
+function _objectSpread$1(target) {
+var arguments$1 = arguments;
+ for (var i = 1; i < arguments.length; i++) { var source = arguments$1[i] != null ? arguments$1[i] : {}; if (i % 2) { ownKeys$1(source, true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$1(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 var script = {
   name: 'NotificationItem',
   mixins: [positionable, toggleable, colorable],
@@ -1015,6 +1035,13 @@ var script = {
       type: Boolean,
       default: false
     },
+    // Theme
+    theme: {
+      type: Object,
+      default: function _default() {
+        return NOTIFICATION_THEME;
+      }
+    },
     // zindex
     zIndex: {
       type: Number,
@@ -1047,6 +1074,18 @@ var script = {
       return defineProperty({
         zIndex: this.zIndex
       }, this.verticalProperty, "".concat(this.verticalOffset, "px"));
+    },
+    wrapperStyle: function wrapperStyle() {
+      var _this$theme = this.theme,
+          colors = _this$theme.colors,
+          boxShadow = _this$theme.boxShadow;
+      return _objectSpread$1({}, colors && this.setBackgroundColor(colors[this.type]), {}, boxShadow && {
+        'box-shadow': boxShadow
+      });
+    },
+    iconStyle: function iconStyle() {
+      var colors = this.theme.colors;
+      return _objectSpread$1({}, colors && this.setBackgroundColor(colors["".concat(this.type, "Darken")]));
     },
     iconType: function iconType() {
       return this.type && NOTIFICATION_ICONS[this.type];
@@ -1119,18 +1158,17 @@ var script = {
             var __vue_script__ = script;
             
 /* template */
-var __vue_render__ = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('transition',{attrs:{"name":"notification-transition"},on:{"after-leave":_vm.destroyElement}},[_c('div',_vm._g({directives:[{name:"show",rawName:"v-show",value:(_vm.isActive),expression:"isActive"}],ref:"notification",staticClass:"notification",class:[this.type && ("notification--" + (this.type)), this.classes],style:(_vm.positionStyle)},_vm.$listeners),[_c('div',{staticClass:"notification__wrapper"},[_c('div',{staticClass:"notification__content"},[_c('span',{staticClass:"notification__message"},[(Boolean(_vm.iconType) && !_vm.hideIcon)?_c('span',{staticClass:"notification__icon"},[_c('svg',{attrs:{"viewBox":_vm.iconType.viewBox,"width":_vm.iconType.width,"height":_vm.iconType.height,"role":"img","xmlns":"http://www.w3.org/2000/svg"}},[_c('path',{attrs:{"fill":"currentColor","d":_vm.iconType.path}})])]):_vm._e(),_vm._v(" "),_c('p',{staticClass:"notification__text"},[_vm._v(_vm._s(_vm.message)+" ")])]),_vm._v(" "),(_vm.actionText)?_c('button',{staticClass:"notification__action",attrs:{"type":"button"},on:{"click":_vm.onActionClick}},[_vm._v("\n          "+_vm._s(_vm.actionText)+"\n        ")]):_vm._e(),_vm._v(" "),(_vm.showClose)?_c('button',{staticClass:"notification__close",attrs:{"type":"button"},on:{"click":_vm.close}},[_c('svg',{attrs:{"viewBox":_vm.NOTIFICATION_ICONS.close.viewBox,"role":"img","xmlns":"http://www.w3.org/2000/svg"}},[_c('path',{attrs:{"fill":"currentColor","d":_vm.NOTIFICATION_ICONS.close.path}})])]):_vm._e()])])])])};
+var __vue_render__ = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('transition',{attrs:{"name":"notification-transition"},on:{"after-leave":_vm.destroyElement}},[_c('div',_vm._g({directives:[{name:"show",rawName:"v-show",value:(_vm.isActive),expression:"isActive"}],ref:"notification",staticClass:"notification",class:[this.type && ("notification--" + (this.type)), this.classes],style:(_vm.positionStyle)},_vm.$listeners),[_c('div',{staticClass:"notification__wrapper",style:(_vm.wrapperStyle)},[_c('div',{staticClass:"notification__content"},[_c('span',{staticClass:"notification__message"},[(Boolean(_vm.iconType) && !_vm.hideIcon)?_c('span',{staticClass:"notification__icon",style:(_vm.iconStyle)},[_c('svg',{attrs:{"viewBox":_vm.iconType.viewBox,"width":_vm.iconType.width,"height":_vm.iconType.height,"role":"img","xmlns":"http://www.w3.org/2000/svg"}},[_c('path',{attrs:{"fill":"currentColor","d":_vm.iconType.path}})])]):_vm._e(),_vm._v(" "),_c('p',{staticClass:"notification__text"},[_vm._v(_vm._s(_vm.message)+" ")])]),_vm._v(" "),(_vm.actionText)?_c('button',{staticClass:"notification__action",attrs:{"type":"button"},on:{"click":_vm.onActionClick}},[_vm._v("\n          "+_vm._s(_vm.actionText)+"\n        ")]):_vm._e(),_vm._v(" "),(_vm.showClose)?_c('button',{staticClass:"notification__close",attrs:{"type":"button"},on:{"click":_vm.close}},[_c('svg',{attrs:{"viewBox":_vm.NOTIFICATION_ICONS.close.viewBox,"role":"img","xmlns":"http://www.w3.org/2000/svg"}},[_c('path',{attrs:{"fill":"currentColor","d":_vm.NOTIFICATION_ICONS.close.path}})])]):_vm._e()])])])])};
 var __vue_staticRenderFns__ = [];
 
   /* style */
   var __vue_inject_styles__ = function (inject) {
     if (!inject) { return }
-    inject("data-v-6992dfd9_0", { source: "*,::after,::before{box-sizing:border-box}", map: undefined, media: undefined })
-,inject("data-v-6992dfd9_1", { source: ".notification[data-v-6992dfd9]{position:fixed;display:flex;align-items:center;left:0;right:0;font-size:14px;color:#fff;pointer-events:none;transition:all .4s cubic-bezier(.25,.8,.5,1);transition-property:transform,top,bottom,opacity}.notification--absolute[data-v-6992dfd9]{position:absolute}.notification--top[data-v-6992dfd9]{top:0}.notification--bottom[data-v-6992dfd9]{bottom:0}@media only screen and (min-width:480px){.notification--left[data-v-6992dfd9]:not(.notification--full-width),.notification--right[data-v-6992dfd9]:not(.notification--full-width){margin:0 24px}.notification--left:not(.notification--full-width).notification--top[data-v-6992dfd9],.notification--right:not(.notification--full-width).notification--top[data-v-6992dfd9]{transform:translateY(24px)}.notification--left:not(.notification--full-width).notification--bottom[data-v-6992dfd9],.notification--right:not(.notification--full-width).notification--bottom[data-v-6992dfd9]{transform:translateY(-24px)}}.notification__wrapper[data-v-6992dfd9]{position:relative;display:flex;align-items:center;width:100%;background-color:#000;pointer-events:auto;box-shadow:0 3px 5px -1px rgba(0,0,0,.2),0 6px 10px 0 rgba(0,0,0,.14),0 1px 18px 0 rgba(0,0,0,.12)}.notification--success .notification__wrapper[data-v-6992dfd9]{background-color:#4f88ff}.notification--info .notification__wrapper[data-v-6992dfd9]{background-color:#5d6a89}.notification--warning .notification__wrapper[data-v-6992dfd9]{background-color:#f8a623}.notification--error .notification__wrapper[data-v-6992dfd9]{background-color:#ff4577}.notification--offline .notification__wrapper[data-v-6992dfd9]{background-color:#ff4577}@media only screen and (min-width:480px){.notification__wrapper[data-v-6992dfd9]{width:auto;max-width:568px;min-width:288px;margin:0 auto;border-radius:4px}.notification--left .notification__wrapper[data-v-6992dfd9]{margin-left:0}.notification--right .notification__wrapper[data-v-6992dfd9]{margin-right:0}.notification--full-width .notification__wrapper[data-v-6992dfd9]{width:100%;max-width:100%;border-radius:0}}.notification__content[data-v-6992dfd9]{position:relative;display:flex;align-items:center;justify-content:space-between;width:100%;min-height:48px;padding:8px 24px;overflow:hidden}.notification--multi-line .notification__content[data-v-6992dfd9]{min-height:80px;padding:16px 24px}.notification__message[data-v-6992dfd9]{position:relative;display:flex;align-items:center;flex-grow:1}.notification__message p[data-v-6992dfd9]{font-stretch:normal;letter-spacing:.23px;line-height:inherit;font-weight:400;margin:0}.notification__close svg[data-v-6992dfd9]{position:relative;height:20px;width:20px}.notification button[data-v-6992dfd9]{border:none;margin:0;padding:0;width:auto;overflow:visible;background:0 0;color:inherit;font:inherit;line-height:normal;-webkit-font-smoothing:inherit;-moz-osx-font-smoothing:inherit;-webkit-appearance:none;position:relative;display:inline-flex;flex:0 0 auto;align-items:center;justify-content:center;border-radius:4px;cursor:pointer;padding:8px;margin:0 0 0 16px;height:auto;color:#fff;font-size:14px;font-weight:500;outline:0;text-decoration:none;transition:.3s cubic-bezier(.25,.8,.5,1),color 1ms;user-select:none}.notification button[data-v-6992dfd9]:active,.notification button[data-v-6992dfd9]:focus{outline:0;box-shadow:0}.notification button[data-v-6992dfd9]:hover{background-color:rgba(0,0,0,.1)}.notification button[data-v-6992dfd9]:first-of-type{margin:0 0 0 24px}.notification button.notification__close[data-v-6992dfd9]{border-radius:50%}.notification button.notification__action[data-v-6992dfd9]{background-color:rgba(0,0,0,.1)}.notification button.notification__action[data-v-6992dfd9]:hover{background-color:rgba(0,0,0,.3)}.notification__icon[data-v-6992dfd9]{display:flex;justify-content:center;align-items:center;border-radius:4px;width:26px;min-width:26px;height:26px;min-height:26px;margin-right:16px}.notification--success .notification__icon[data-v-6992dfd9]{background-color:#1c66ff}.notification--info .notification__icon[data-v-6992dfd9]{background-color:#535e7a}.notification--warning .notification__icon[data-v-6992dfd9]{background-color:#e18d07}.notification--error .notification__icon[data-v-6992dfd9]{background-color:#ff1252}.notification--offline .notification__icon[data-v-6992dfd9]{background-color:#ff1252}.notification__icon svg[data-v-6992dfd9]{position:relative;width:auto}.notification-transition-enter-active[data-v-6992dfd9],.notification-transition-leave-active[data-v-6992dfd9]{transition:transform .4s cubic-bezier(.25,.8,.5,1)}.notification-transition-enter-active .notification__content[data-v-6992dfd9],.notification-transition-leave-active .notification__content[data-v-6992dfd9]{transition:opacity .3s linear .1s}.notification-transition-enter .notification__content[data-v-6992dfd9]{opacity:0}.notification-transition-enter-to .notification__content[data-v-6992dfd9],.notification-transition-leave .notification__content[data-v-6992dfd9]{opacity:1}.notification-transition-enter.notification.notification--top[data-v-6992dfd9],.notification-transition-leave-to.notification.notification--top[data-v-6992dfd9]{transform:translateY(calc(-100% - 8px))}@media only screen and (min-width:480px){.notification-transition-enter.notification.notification--top.notification--right[data-v-6992dfd9]:not(.notification--full-width),.notification-transition-leave-to.notification.notification--top.notification--right[data-v-6992dfd9]:not(.notification--full-width){transform:translateY(24px) translateX(calc(100% + 8px))}.notification-transition-enter.notification.notification--top.notification--left[data-v-6992dfd9]:not(.notification--full-width),.notification-transition-leave-to.notification.notification--top.notification--left[data-v-6992dfd9]:not(.notification--full-width){transform:translateY(24px) translateX(calc(-100% - 8px))}}.notification-transition-enter.notification.notification--bottom[data-v-6992dfd9],.notification-transition-leave-to.notification.notification--bottom[data-v-6992dfd9]{transform:translateY(100%)}@media only screen and (min-width:480px){.notification-transition-enter.notification.notification--bottom.notification--right[data-v-6992dfd9]:not(.notification--full-width),.notification-transition-leave-to.notification.notification--bottom.notification--right[data-v-6992dfd9]:not(.notification--full-width){transform:translateY(-24px) translateX(calc(100% + 8px))}.notification-transition-enter.notification.notification--bottom.notification--left[data-v-6992dfd9]:not(.notification--full-width),.notification-transition-leave-to.notification.notification--bottom.notification--left[data-v-6992dfd9]:not(.notification--full-width){transform:translateY(-24px) translateX(calc(-100% - 8px))}}", map: undefined, media: undefined });
+    inject("data-v-4a24e998_0", { source: ".notification .notification *[data-v-4a24e998],.notification[data-v-4a24e998] ::after,.notification[data-v-4a24e998] ::before{box-sizing:border-box}.notification[data-v-4a24e998]{position:fixed;display:flex;align-items:center;left:0;right:0;font-size:14px;color:#fff;pointer-events:none;transition:all .4s cubic-bezier(.25,.8,.5,1);transition-property:transform,top,bottom,opacity}.notification--absolute[data-v-4a24e998]{position:absolute}.notification--top[data-v-4a24e998]{top:0}.notification--bottom[data-v-4a24e998]{bottom:0}@media only screen and (min-width:480px){.notification--left[data-v-4a24e998]:not(.notification--full-width),.notification--right[data-v-4a24e998]:not(.notification--full-width){margin:0 24px}.notification--left:not(.notification--full-width).notification--top[data-v-4a24e998],.notification--right:not(.notification--full-width).notification--top[data-v-4a24e998]{transform:translateY(24px)}.notification--left:not(.notification--full-width).notification--bottom[data-v-4a24e998],.notification--right:not(.notification--full-width).notification--bottom[data-v-4a24e998]{transform:translateY(-24px)}}.notification__wrapper[data-v-4a24e998]{position:relative;display:flex;align-items:center;width:100%;background-color:#000;pointer-events:auto}@media only screen and (min-width:480px){.notification__wrapper[data-v-4a24e998]{width:auto;max-width:568px;min-width:288px;margin:0 auto;border-radius:4px}.notification--left .notification__wrapper[data-v-4a24e998]{margin-left:0}.notification--right .notification__wrapper[data-v-4a24e998]{margin-right:0}.notification--full-width .notification__wrapper[data-v-4a24e998]{width:100%;max-width:100%;border-radius:0}}.notification__content[data-v-4a24e998]{position:relative;display:flex;align-items:center;justify-content:space-between;width:100%;min-height:48px;padding:8px 24px;overflow:hidden}.notification--multi-line .notification__content[data-v-4a24e998]{min-height:80px;padding:16px 24px}.notification__message[data-v-4a24e998]{position:relative;display:flex;align-items:center;flex-grow:1}.notification__message p[data-v-4a24e998]{font-stretch:normal;letter-spacing:.23px;line-height:inherit;font-weight:400;margin:0}.notification__close svg[data-v-4a24e998]{position:relative;height:20px;width:20px}.notification button[data-v-4a24e998]{border:none;margin:0;padding:0;width:auto;overflow:visible;background:0 0;color:inherit;font:inherit;line-height:normal;-webkit-font-smoothing:inherit;-moz-osx-font-smoothing:inherit;-webkit-appearance:none;position:relative;display:inline-flex;flex:0 0 auto;align-items:center;justify-content:center;border-radius:4px;cursor:pointer;padding:8px;margin:0 0 0 16px;height:auto;color:#fff;font-size:14px;font-weight:500;outline:0;text-decoration:none;transition:.3s cubic-bezier(.25,.8,.5,1),color 1ms;user-select:none}.notification button[data-v-4a24e998]:active,.notification button[data-v-4a24e998]:focus{outline:0;box-shadow:0}.notification button[data-v-4a24e998]:hover{background-color:rgba(0,0,0,.1)}.notification button[data-v-4a24e998]:first-of-type{margin:0 0 0 24px}.notification button.notification__close[data-v-4a24e998]{border-radius:50%}.notification button.notification__action[data-v-4a24e998]{background-color:rgba(0,0,0,.1)}.notification button.notification__action[data-v-4a24e998]:hover{background-color:rgba(0,0,0,.3)}.notification__icon[data-v-4a24e998]{display:flex;justify-content:center;align-items:center;border-radius:4px;width:26px;min-width:26px;height:26px;min-height:26px;margin-right:16px}.notification__icon svg[data-v-4a24e998]{position:relative;width:auto}.notification-transition-enter-active[data-v-4a24e998],.notification-transition-leave-active[data-v-4a24e998]{transition:transform .4s cubic-bezier(.25,.8,.5,1)}.notification-transition-enter-active .notification__content[data-v-4a24e998],.notification-transition-leave-active .notification__content[data-v-4a24e998]{transition:opacity .3s linear .1s}.notification-transition-enter .notification__content[data-v-4a24e998]{opacity:0}.notification-transition-enter-to .notification__content[data-v-4a24e998],.notification-transition-leave .notification__content[data-v-4a24e998]{opacity:1}.notification-transition-enter.notification.notification--top[data-v-4a24e998],.notification-transition-leave-to.notification.notification--top[data-v-4a24e998]{transform:translateY(calc(-100% - 8px))}@media only screen and (min-width:480px){.notification-transition-enter.notification.notification--top.notification--right[data-v-4a24e998]:not(.notification--full-width),.notification-transition-leave-to.notification.notification--top.notification--right[data-v-4a24e998]:not(.notification--full-width){transform:translateY(24px) translateX(calc(100% + 8px))}.notification-transition-enter.notification.notification--top.notification--left[data-v-4a24e998]:not(.notification--full-width),.notification-transition-leave-to.notification.notification--top.notification--left[data-v-4a24e998]:not(.notification--full-width){transform:translateY(24px) translateX(calc(-100% - 8px))}}.notification-transition-enter.notification.notification--bottom[data-v-4a24e998],.notification-transition-leave-to.notification.notification--bottom[data-v-4a24e998]{transform:translateY(100%)}@media only screen and (min-width:480px){.notification-transition-enter.notification.notification--bottom.notification--right[data-v-4a24e998]:not(.notification--full-width),.notification-transition-leave-to.notification.notification--bottom.notification--right[data-v-4a24e998]:not(.notification--full-width){transform:translateY(-24px) translateX(calc(100% + 8px))}.notification-transition-enter.notification.notification--bottom.notification--left[data-v-4a24e998]:not(.notification--full-width),.notification-transition-leave-to.notification.notification--bottom.notification--left[data-v-4a24e998]:not(.notification--full-width){transform:translateY(-24px) translateX(calc(-100% - 8px))}}", map: undefined, media: undefined });
 
   };
   /* scoped */
-  var __vue_scope_id__ = "data-v-6992dfd9";
+  var __vue_scope_id__ = "data-v-4a24e998";
   /* module identifier */
   var __vue_module_identifier__ = undefined;
   /* functional template */
@@ -1263,11 +1301,11 @@ var __vue_staticRenderFns__ = [];
     __vue_module_identifier__,
     __vue_create_injector__);
 
-function ownKeys$1(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { keys.push.apply(keys, Object.getOwnPropertySymbols(object)); } if (enumerableOnly) { keys = keys.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } return keys; }
+function ownKeys$2(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { keys.push.apply(keys, Object.getOwnPropertySymbols(object)); } if (enumerableOnly) { keys = keys.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } return keys; }
 
-function _objectSpread$1(target) {
+function _objectSpread$2(target) {
 var arguments$1 = arguments;
- for (var i = 1; i < arguments.length; i++) { var source = arguments$1[i] != null ? arguments$1[i] : {}; if (i % 2) { ownKeys$1(source, true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$1(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+ for (var i = 1; i < arguments.length; i++) { var source = arguments$1[i] != null ? arguments$1[i] : {}; if (i % 2) { ownKeys$2(source, true).forEach(function (key) { defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$2(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 var NotificationConstructor = Vue.extend(NotificationItem);
 var instance;
 var instances = [];
@@ -1281,7 +1319,7 @@ var Notification = function Notification() {
   var positions = getPositionsFromOptions(mergedParams);
   var positionName = setPositionName(positions);
   instance = new NotificationConstructor({
-    propsData: _objectSpread$1({}, mergedParams, {
+    propsData: _objectSpread$2({}, mergedParams, {
       value: false,
       // required prop
       position: positionName,
@@ -1378,7 +1416,10 @@ function mergeOptionsWithParams(options, params) {
   var paramsToMerge = typeof params === 'string' ? {
     message: params
   } : params;
-  if (!options.breakpoints) { return paramsToMerge; }
+  var theme = Object.assign({}, NOTIFICATION_THEME, options.theme, params.theme);
+  if (!options.breakpoints) { return _objectSpread$2({}, paramsToMerge, {
+    theme: theme
+  }); }
   var windowWidth = window.innerWidth;
   var match = -1;
   Object.keys(options.breakpoints).forEach(function (breakpoint) {
@@ -1387,7 +1428,9 @@ function mergeOptionsWithParams(options, params) {
     }
   });
   if (match === -1) { return paramsToMerge; }
-  return Object.assign({}, options.breakpoints[match], paramsToMerge);
+  return Object.assign({}, options.breakpoints[match], _objectSpread$2({}, paramsToMerge, {
+    theme: theme
+  }));
 }
 
 var install = function install(Vue) {
@@ -1399,7 +1442,7 @@ var install = function install(Vue) {
 
 var plugin = {
   // eslint-disable-next-line no-undef
-  version: "0.1.2",
+  version: "0.1.3-rc.1",
   install: install
 };
 

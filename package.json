@@ -1,7 +1,7 @@
 {
   "name": "@mathieustan/vue-notification",
   "description": "Clean Notifications made with VueJs",
-  "version": "0.1.2",
+  "version": "0.1.3-rc.1",
   "author": "Mathieu Stanowski <mathieu.stan@gmail.com>",
   "keywords": [
     "vue",
